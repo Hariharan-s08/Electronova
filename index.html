@@ -238,6 +238,11 @@
   input[type="file"]::file-selector-button:hover{background:#238577}
   .field-note.field-error{color:#C43D2E;font-weight:500}
   .field-note{font-size:.82rem;color:var(--text-soft);margin-top:.4rem}
+  .register-btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-width:240px;padding:1rem 2rem;border-radius:999px;background:linear-gradient(135deg,#f4b942,#d88719);color:#160f08;border:2px solid #f8d37b;box-shadow:0 10px 30px rgba(216,135,25,.28),inset 0 1px 0 rgba(255,255,255,.35);font-size:1rem;font-weight:800;letter-spacing:.08em;text-decoration:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+  .register-btn span{font-size:1.35rem;line-height:1;transition:transform .2s ease}
+  .register-btn:hover{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 16px 38px rgba(216,135,25,.4),inset 0 1px 0 rgba(255,255,255,.45)}
+  .register-btn:hover span{transform:translateX(4px)}
+  .register-btn:active{transform:translateY(-1px)}
   button.submit{background:var(--copper);color:#fff;border:0;border-radius:2px;font:inherit;font-weight:600;padding:.9rem 1.6rem;cursor:pointer;justify-self:start}
   button.submit:hover{background:#9c4717}
   .form-note{font-size:.88rem;color:var(--text-soft)}
@@ -634,48 +639,13 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Register your team</h2>
-      <p>One entry per team, filled in by the team lead. Shortlisted teams are notified by email within five days.</p>
+      <p>One entry per team, filled in by the team lead. Complete your registration through our official Google Form.</p>
     </div>
-    <div style="max-width:660px">
-      <form id="reg-form">
-        <div class="row">
-          <div><label for="team">Team name</label><input id="team" name="team" required placeholder="e.g. Nyquist Nine"></div>
-          <div><label for="size">Team size</label>
-            <select id="size" name="size"><option>2 members</option><option selected>3 members</option><option>4 members</option></select>
-          </div>
-        </div>
-        <div class="row">
-          <div><label for="lead">Team lead's name</label><input id="lead" name="lead" required placeholder="Full name"></div>
-          <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="10-digit mobile"></div>
-        </div>
-        <div class="row">
-          <div><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@email.com"></div>
-          <div><label for="college">College</label><input id="college" name="college" required placeholder="Institution name"></div>
-        </div>
-        <div class="row">
-          <div><label for="track">Track</label>
-            <select id="track" name="track">
-              <option>IoT &amp; IIoT</option>
-              <option>5G/6G &amp; Wireless Communication</option>
-              <option>Embedded Systems &amp; Robotics</option>
-              <option>FPGA, VLSI &amp; Digital Systems</option>
-              <option>Biomedical &amp; Wearable Electronics</option>
-              <option>Open innovation</option>
-            </select>
-          </div>
-          <div><label for="year">Year of study</label>
-            <select id="year" name="year"><option>First year</option><option>Second year</option><option selected>Third year</option><option>Final year</option><option>Postgraduate</option></select>
-          </div>
-        </div>
-        <div>
-          <label for="abstract">Project abstract (PDF only)</label>
-          <input id="abstract" name="abstract" type="file" accept=".pdf,application/pdf" required>
-          <p class="field-note" id="abstract-note">One to two pages: the problem you're tackling, your proposed approach, and the hardware you plan to build it on. PDF only, max 5 MB.</p>
-        </div>
-        <button class="submit" type="submit">Send registration</button>
-        <p class="form-note">Entries close 16 October 2026. Entry fee is ₹200 per head, payable offline at the venue. A confirmation copy of your registration email is sent to your own address automatically.</p>
-      </form>
-      <p class="status" id="status"></p>
+    <div style="max-width:660px; text-align:center; margin:auto; padding:2rem 0;">
+      <p style="margin-bottom:1.25rem;">Entries close 16 October 2026. Entry fee is ₹200 per head.</p>
+      <a href="https://forms.gle/FcBzptDRJrJzDESq8" class="register-btn" aria-label="Register for ElectroNova 2026">
+        REGISTER NOW <span>→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -752,7 +722,7 @@
         <h3>Reach us</h3>
         <ul>
           <li><a href="mailto:e18ecl301@egspec.org">e18ecl301@egspec.org</a></li>
-          <li><a href="#register">Registration form</a></li>
+          <li><a href="#register">Registration</a></li>
           <li><a href="#schedule">Event schedule</a></li>
         </ul>
       </div>
@@ -761,14 +731,6 @@
   </div>
 </footer>
 
-<div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
-  <div class="modal-card">
-    <div class="modal-check">&#10003;</div>
-    <h3 id="success-modal-title">Registration Successfully Completed!</h3>
-    <p id="success-modal-text">Your team is registered for ElectroNova 2026. A confirmation email is on its way to your inbox.</p>
-    <button type="button" id="success-modal-close">Done</button>
-  </div>
-</div>
 
 <script>
   var start = new Date("2026-10-23T10:00:00+05:30").getTime();
@@ -785,117 +747,6 @@
   }
   tick();
   setInterval(tick, 1000);
-
-  // Success popup shown once a registration has gone through.
-  var successModal = document.getElementById("success-modal");
-  var successModalText = document.getElementById("success-modal-text");
-  function showSuccessModal(message) {
-    successModalText.textContent = message;
-    successModal.classList.add("show");
-  }
-  document.getElementById("success-modal-close").addEventListener("click", function () {
-    successModal.classList.remove("show");
-  });
-  successModal.addEventListener("click", function (e) {
-    if (e.target === successModal) successModal.classList.remove("show");
-  });
-
-  // Paste the Google Apps Script "Web app URL" here once deployed (see
-  // apps-script-backend.gs for setup steps). Leave empty to keep using the
-  // manual mailto flow.
-  var GOOGLE_SCRIPT_URL = "";
-
-  document.getElementById("reg-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var f = e.target;
-    var note = document.getElementById("abstract-note");
-    var status = document.getElementById("status");
-    var submitBtn = f.querySelector(".submit");
-    var file = f.abstract.files[0];
-
-    if (!file) {
-      note.textContent = "Please attach your abstract as a PDF before sending.";
-      note.classList.add("field-error");
-      f.abstract.focus();
-      return;
-    }
-    var isPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
-    if (!isPdf) {
-      note.textContent = "That file isn't a PDF. Please attach your abstract as a .pdf file.";
-      note.classList.add("field-error");
-      f.abstract.focus();
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      note.textContent = "That PDF is over 5 MB. Please compress it and try again.";
-      note.classList.add("field-error");
-      f.abstract.focus();
-      return;
-    }
-    note.textContent = "One to two pages: the problem you're tackling, your proposed approach, and the hardware you plan to build it on. PDF only, max 5 MB.";
-    note.classList.remove("field-error");
-
-    var fields = {
-      team: f.team.value, size: f.size.value, lead: f.lead.value,
-      phone: f.phone.value, email: f.email.value, college: f.college.value,
-      track: f.track.value, year: f.year.value
-    };
-
-    // Backend configured: read the PDF, POST everything, done automatically.
-    if (GOOGLE_SCRIPT_URL) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
-      var reader = new FileReader();
-      reader.onload = function () {
-        fields.abstractFileName = file.name;
-        fields.abstractBase64 = reader.result;
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(fields)
-        }).then(function () {
-          status.textContent = "Registered! A confirmation email is on its way to " + fields.email + ".";
-          status.classList.add("show");
-          showSuccessModal("Team \"" + fields.team + "\" is registered for ElectroNova 2026. A confirmation email is on its way to " + fields.email + ", and your entry has been added to our registrations sheet.");
-          f.reset();
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Send registration";
-        }).catch(function () {
-          status.textContent = "Something went wrong sending that. Please try again or email us directly.";
-          status.classList.add("show");
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Send registration";
-        });
-      };
-      reader.readAsDataURL(file);
-      return;
-    }
-
-    // Fallback (no backend configured yet): open the mail app as before.
-    var body = [
-      "This is your ElectroNova 2026 registration. A copy of this email has been sent to your address as confirmation — keep it for your records.",
-      "",
-      "Team name: " + fields.team,
-      "Team size: " + fields.size,
-      "Team lead: " + fields.lead,
-      "Phone: " + fields.phone,
-      "Email: " + fields.email,
-      "College: " + fields.college,
-      "Track: " + fields.track,
-      "Year: " + fields.year,
-      "Abstract file: " + file.name,
-      "",
-      "Other members (name, branch, year):",
-      "1. ", "2. ", "3. "
-    ].join("\n");
-    status.textContent = "Your mail app is opening with the details filled in, and a copy will be sent to " + fields.email + " as your confirmation. Attach " + file.name + " to the email yourself — mail links can't attach files automatically — then add your other members' names and send it.";
-    status.classList.add("show");
-    window.location.href = "mailto:e18ecl301@egspec.org"
-      + "?cc=" + encodeURIComponent(fields.email)
-      + "&subject=" + encodeURIComponent("ElectroNova 2026 registration - " + fields.team)
-      + "&body=" + encodeURIComponent(body);
-  });
 </script>
 </body>
 </html>
