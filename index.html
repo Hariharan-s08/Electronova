@@ -126,6 +126,14 @@
   .coord-phone{color:var(--link-text);font-family:"IBM Plex Mono",monospace;font-size:.82rem;white-space:nowrap;text-decoration:none}
   .coord-phone:hover{text-decoration:underline}
 
+  /* Coordinator cards keep their dark glass surface in light mode, so use the
+     same high-contrast text treatment as the hero for readability. */
+  :root:not([data-theme="dark"]) .coord-title{color:#F2F5FA}
+  :root:not([data-theme="dark"]) .coord-item strong{color:#F2F5FA}
+  :root:not([data-theme="dark"]) .coord-item em{color:#C7D0E0}
+  :root:not([data-theme="dark"]) .coord-phone{color:#5FD9C9}
+  :root:not([data-theme="dark"]) .fc-label{color:#8FF5E4}
+
   .readout{display:flex;flex-wrap:wrap;gap:0 2.2rem;border-top:1px solid rgba(255,255,255,.16);padding-top:1.2rem;margin-top:2.2rem}
   .readout div{min-width:80px}
   .readout dt{font-size:.7rem;color:var(--board-soft);font-family:"IBM Plex Mono",monospace;margin-bottom:.1rem}
