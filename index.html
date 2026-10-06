@@ -24,6 +24,7 @@
     --board-line:#1A2430;
     --board-soft:#57646F;
     --trace:rgba(180,85,30,.22);
+    --link-text:#17695E;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -40,6 +41,7 @@
       --board-line:#E9EDE6;
       --board-soft:#9EACA3;
       --trace:rgba(224,134,63,.2);
+      --link-text:#5FD9C9;
     }
   }
   :root[data-theme="dark"]{
@@ -47,6 +49,7 @@
     --text:#E9EDE6; --text-soft:#9EACA3; --copper:#E0863F; --copper-soft:#5A3B24;
     --solder:#3FB3A0; --board:#1B2320; --board-line:#E9EDE6; --board-soft:#9EACA3;
     --trace:rgba(224,134,63,.2);
+    --link-text:#5FD9C9;
   }
 
   *{box-sizing:border-box}
@@ -120,7 +123,7 @@
   .coord-item:last-child{border-bottom:0}
   .coord-item strong{display:block;color:var(--board-line);font-weight:600;font-size:.93rem;line-height:1.35}
   .coord-item em{display:block;font-style:normal;color:var(--board-soft);font-size:.82rem;line-height:1.4}
-  .coord-phone{color:#5FD9C9;font-family:"IBM Plex Mono",monospace;font-size:.82rem;white-space:nowrap;text-decoration:none}
+  .coord-phone{color:var(--link-text);font-family:"IBM Plex Mono",monospace;font-size:.82rem;white-space:nowrap;text-decoration:none}
   .coord-phone:hover{text-decoration:underline}
 
   .readout{display:flex;flex-wrap:wrap;gap:0 2.2rem;border-top:1px solid rgba(255,255,255,.16);padding-top:1.2rem;margin-top:2.2rem}
@@ -128,7 +131,7 @@
   .readout dt{font-size:.7rem;color:var(--board-soft);font-family:"IBM Plex Mono",monospace;margin-bottom:.1rem}
   .readout dd{margin:0;font-family:"IBM Plex Mono",monospace;font-size:1.45rem;color:var(--board-line);font-weight:500}
 
-  .fc-label{display:block;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#5FD9C9;margin-bottom:.15rem}
+  .fc-label{display:block;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--link-text);margin-bottom:.15rem}
 
   .summit-banner{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.4rem 0;text-align:center}
   .summit-label{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin:0 0 .3rem}
